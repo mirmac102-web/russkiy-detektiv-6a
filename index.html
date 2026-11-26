@@ -232,6 +232,8 @@ main[data-phase=intro],main[data-phase=assembled]{min-height:clamp(390px,63svh,6
 .scores{margin:15px 0 7px}.scores b{display:block;color:var(--team);font:600 44px/1.3 var(--display)}
 .gallery{grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr));margin-top:18px;gap:24px}
 .gallery .photo img{height:145px}.gallery .photo figcaption{font-size:17px}
+.case-credits{border-top:1px solid var(--line);margin-top:28px;padding-top:16px}
+.case-credits p+p{margin-top:4px}
 dialog{width:min(640px,calc(100% - 32px));max-height:88svh;overscroll-behavior:contain;padding:clamp(20px,3vw,40px);border:1px solid #9c9b89;border-top:4px solid var(--red);background:var(--sheet) var(--image-grain);color:var(--ink);box-shadow:0 20px 70px #0c1b1660}
 dialog::backdrop{background:#18221dc4;backdrop-filter:blur(3px)}
 .dialog-head,.journal-head{display:flex;align-items:center;justify-content:space-between;gap:15px}
@@ -574,7 +576,11 @@ function finish(){
  clearInterval(musicTimer);statusLine.textContent='Дело № 6А · Закрыто';
  const participants=[...new Set(history)];
  const top=Math.max(...scores),winners=scores.map((s,i)=>s===top?i+1:null).filter(Boolean);
- show('end',`<article class="newspaper"><div class="edition-line"><span>Школьная редакция</span><span>Специальный выпуск · 6А</span></div><div class="masthead">Школьный вестник</div><section class="lead-story"><img src="${art('press')}" alt="Школьная редакция встречает восстановленный выпуск"><div><small>Дело № 6А · Закрыто</small><h2>Страница найдена!</h2><p>Пропавший лист обнаружили среди черновиков. Редакция вернула его в номер благодаря трём командам сыщиков.</p></div></section></article><h3>${winners.length===1?'Победила команда '+winners[0]:'Ничья · команды '+winners.join(' и ')}</h3><div class="scores">${scores.map((s,i)=>`<section><div class="unit-heading">${teamInsignia(i)}<h3>Команда ${i+1}</h3></div><b>${s}</b>Верных из ${counts[i]}</section>`).join('')}</div>${button('Сыграть ещё раз','again')}<h3 style="margin-top:1em">Доска подозреваемых</h3><div class="board gallery">${participants.map(photo).join('')}</div>`);
+ show('end',`<article class="newspaper"><div class="edition-line"><span>Школьная редакция</span><span>Специальный выпуск · 6А</span></div><div class="masthead">Школьный вестник</div><section class="lead-story"><img src="${art('press')}" alt="Школьная редакция встречает восстановленный выпуск"><div><small>Дело № 6А · Закрыто</small><h2>Страница найдена!</h2><p>Пропавший лист обнаружили среди черновиков. Редакция вернула его в номер благодаря трём командам сыщиков.</p></div></section></article><h3>${winners.length===1?'Победила команда '+winners[0]:'Ничья · команды '+winners.join(' и ')}</h3><div class="scores">${scores.map((s,i)=>`<section><div class="unit-heading">${teamInsignia(i)}<h3>Команда ${i+1}</h3></div><b>${s}</b>Верных из ${counts[i]}</section>`).join('')}</div>${button('Сыграть ещё раз','again')}<h3 style="margin-top:1em">Доска подозреваемых</h3><div class="board gallery">${participants.map(photo).join('')}</div>
+<section class="case-credits" aria-label="Авторы игры">
+  <p>Выполнил: <strong>Умаров Азизбек</strong></p>
+  <p>Помощь от: <strong>Макартецкого Мирона</strong></p>
+</section>`);
 }
 scene.addEventListener('click',e=>{
  const b=e.target.closest('button[data-act]');if(!b||b.disabled)return;
